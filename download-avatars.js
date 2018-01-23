@@ -1,10 +1,10 @@
-var request = require('request');
-var token = require('./secrets');
-var fs = require('fs');
+const request = require('request');
+const token = require('./secrets');
+const fs = require('fs');
 
 //Passed as arguments in Node
-var repoOwner = process.argv[2];
-var repoName = process.argv[3];
+const repoOwner = process.argv[2];
+const repoName = process.argv[3];
 
 //Welcome Message
 console.log('Welcome to the GitHub Avatar Downloader!');
@@ -19,7 +19,7 @@ function getRepoContributors(repoOwner, repoName, cb) {
 	}
 
 	//What we are working with
-  var options = {
+  const options = {
     
     url: "https://api.github.com/repos/" + repoOwner + "/" + repoName + "/contributors",
     
@@ -45,7 +45,7 @@ function getRepoContributors(repoOwner, repoName, cb) {
 function sortAvatars(err, body) {
 	
 	//Parse string to object
-	var parsed = JSON.parse(body);
+	const parsed = JSON.parse(body);
 
 	//Loop through each avatar url
 	for (item of parsed) {
@@ -69,7 +69,7 @@ function downloadImageByURL(url, filePath) {
 		.on('response', (response) => {
 			
 			//Lets us know whether request was successful
-			console.log('Status Code: ', response.statusCode)
+			console.log('Downloading images: ', response.statusCode)
 		})
 		
 		//Tell it where to go
